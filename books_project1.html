@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books Project</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="ajout1">Ajouter un livre</button>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>Price</th>
+        <th>Edit/supprimer</th>
+      </tr>
+    </table>
+    <form method="post">
+      <label>le id de livre à ajouter : </label>
+      <input type="text" value="Donner un Id pour le livre souhaitez" id="id" />
+      <label>le nom de livre à ajouter : </label>
+      <input
+        type="text"
+        value="Donner un nom pour le livre souhaitez"
+        id="nomlivre"
+      />
+      <label>le nom de l'auteur à ajouter : </label>
+      <input
+        type="text"
+        value="Donner un nom auteur pour le livre souhaitez"
+        id="nomauteur"
+      />
+      <label>le prix de livre à ajouter : </label>
+      <input
+        type="text"
+        value="Donner un prix pour le livre souhaitez"
+        id="prix"
+      />
+    </form>
+    <form>
+      <label>le id de livre à supprimer : </label>
+      <input
+        type="text"
+        value="Donner un Id pour le livre souhaitez"
+        id="idsup"
+      />
+    </form>
+    <script>
+      var books = [
+        { id: 0123, title: "Atomic habits", author: "James avel", price: "40" },
+        {
+          id: 4567,
+          title: "crepuscule d'une idole",
+          author: "michel onfray",
+          price: "50",
+        },
+      ];
+      var i = 2;
+
+      document.getElementById("ajout1").addEventListener("click", () => {
+        nomliv = document.getElementById("nomlivre").textContent;
+        auteur = document.getElementById("nomauteur").textContent;
+        price1 = document.getElementById("prix").textContent;
+        id1 = document.getElementById("id").textContent;
+        newbook = [{ id: id1, title: nomliv, author: auteur, price: price1 }];
+        newbook.push(books);
+        i = i + 1;
+        console.log(books);
+        table = document.getElementsByTagName("table");
+        function addBooksToTable(books) {
+          books.forEach((book) => {
+            const newRow = table.insertRow(-1);
+
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            const cell5 = newRow.insertCell(4);
+
+            cell1.innerHTML = books.id;
+            cell2.innerHTML = books.title;
+            cell3.innerHTML = books.author;
+            cell4.innerHTML = books.price;
+            const editButton = document.createElement("button");
+            editButton.innerHTML = "Editer";
+            editButton.onclick = function () {
+              alert("Editer le livre avec ID: " + book.id);
+            };
+
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Supprimer";
+            deleteButton.onclick = function () {
+              table.deleteRow(newRow.rowIndex);
+            };
+
+            cell5.appendChild(editButton);
+            cell5.appendChild(deleteButton);
+          });
+        }
+      });
+      addBooksToTable(books);
+    </script>
+  </body>
+</html>
